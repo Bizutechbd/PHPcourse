@@ -17,38 +17,33 @@
 <br>
 <br>
 <br>
-
-<?php
-include "Calculator.php";
-$calc = new Calculator();
-
-$result = '';
-//echo $_SERVER['REQUEST_METHOD']
-
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $numberOne = $_GET['numberOne'];
-    $numberTwo = $_GET['numberTwo'];
-    //echo $_GET['add'];
-
-
-    if ($_GET['add'] == '+') {
-        $result = $calc->add($numberOne, $numberTwo);
-    } elseif ($_GET['sub'] == '-') {
-        $result = $calc->sub($numberOne, $numberTwo);
-    } elseif ($_GET['multi'] == '*') {
-        $result = $calc->multi($numberOne, $numberTwo);
-    } elseif ($_GET['divi'] == '/') {
-        $result = $calc->div($numberOne, $numberTwo);
-    } else {
-        $result = 0;
-    }
-}
-?>
 <div class="container">
 
     <div class="row">
         <div class="col-4 offset-4">
-            <h1 class="text-center">Result is : <?php echo $result; ?></h1>
+            <h1 class="text-center">Result is :
+                <?php
+                include "Calculator.php";
+                if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+                    $op = '';
+                    if ($_GET['add'] == '+'){
+                        $op = '+';
+                    }elseif ($_GET['sub'] == '-'){
+                        $op = '-';
+                    }elseif ($_GET['multi'] == '*'){
+                        $op = '*';
+                    }elseif ($_GET['divi'] == '/'){
+                        $op = '+';
+                    }else{
+                        $op = '+';
+                    }
+
+                    $calc = new Calculator($_GET['numberOne'], $_GET['numberTwo'], $op);
+
+                }
+                ?>
+            </h1>
             <form method="GET" action="index.php">
                 <div class="form-group">
                     <label>Number One</label>
