@@ -1,4 +1,4 @@
-<?php // error_reporting(0)  ?>
+<?php error_reporting(0) ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Super Global Method</title>
 </head>
@@ -17,38 +18,52 @@
 <br>
 <br>
 
+<?php
+include "Calculator.php";
+$calc = new Calculator();
+
+$result = '';
+//echo $_SERVER['REQUEST_METHOD']
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $numberOne = $_GET['numberOne'];
+    $numberTwo = $_GET['numberTwo'];
+    //echo $_GET['add'];
+
+
+    if ($_GET['add'] == '+') {
+        $result = $calc->add($numberOne, $numberTwo);
+    } elseif ($_GET['sub'] == '-') {
+        $result = $calc->sub($numberOne, $numberTwo);
+    } elseif ($_GET['multi'] == '*') {
+        $result = $calc->multi($numberOne, $numberTwo);
+    } elseif ($_GET['divi'] == '/') {
+        $result = $calc->div($numberOne, $numberTwo);
+    } else {
+        $result = 0;
+    }
+}
+?>
 <div class="container">
-
-    <?php
-
-    if (isset($_POST['email'])){
-        echo $_POST['email'];
-    }
-    echo '<br />';
-
-    if (isset($_POST['pass'])){
-        echo $_POST['pass'];
-    }
-
-    ?>
 
     <div class="row">
         <div class="col-4 offset-4">
-            <form method="POST" action="index.php">
+            <h1 class="text-center">Result is : <?php echo $result; ?></h1>
+            <form method="GET" action="index.php">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <label>Number One</label>
+                    <input type="number" class="form-control" name="numberOne" placeholder="Enter Number">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" name="pass" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <label>Number two</label>
+                    <input type="number" name="numberTwo" class="form-control" id="exampleInputPassword1"
+                           placeholder="Password">
                 </div>
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <input type="submit" class="btn btn-success" name="add" value="+">
+                <input type="submit" class="btn btn-danger" name="sub" value="-">
+                <input type="submit" class="btn btn-info" name="multi" value="*">
+                <input type="submit" class="btn btn-dark" name="divi" value="/">
             </form>
         </div>
     </div>
@@ -56,8 +71,14 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 </html>
